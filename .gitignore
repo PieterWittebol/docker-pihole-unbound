@@ -4,3 +4,4 @@
 .vscode
 etc-dnsmasq.d/
 etc-pihole/
+docker-compose.yaml
