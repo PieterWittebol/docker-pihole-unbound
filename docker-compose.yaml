@@ -12,20 +12,15 @@ services:
       - 5335:5335/tcp # Uncomment to enable unbound access on local server
      # - 22/tcp # Uncomment to enable SSH
     environment:
-      - FTLCONF_LOCAL_IPV4=${FTLCONF_LOCAL_IPV4}
-      - FTLCONF_LOCAL_IPV6=${FTLCONF_LOCAL_IPV6}
+      #- FTLCONF_LOCAL_IPV4=${FTLCONF_LOCAL_IPV4}
+      #- FTLCONF_LOCAL_IPV6=${FTLCONF_LOCAL_IPV6}
       - TZ=${TZ:-UTC}
-      - WEBPASSWORD=${WEBPASSWORD}
-      - WEBTHEME=${WEBTHEME:-default-light}
-      - REV_SERVER=${REV_SERVER:-false}
-      - REV_SERVER_TARGET=${REV_SERVER_TARGET}
-      - REV_SERVER_DOMAIN=${REV_SERVER_DOMAIN}
-      - REV_SERVER_CIDR=${REV_SERVER_CIDR}
-      - PIHOLE_DNS_=127.0.0.1#5335
-      - DNSSEC="true"
-      - DNSMASQ_LISTENING=single
-      - IPv6="true"
-      - PIHOLE_IPV6="true"
+      - FTLCONF_webserver_api_password=${WEBPASSWORD}
+      - FTLCONF_dns_revServers=${REV_SERVER:-false},${REV_SERVER_CIDR},${REV_SERVER_TARGET},${REV_SERVER_DOMAIN}
+      - FTLCONF_dns_upstreams=127.0.0.1#5335
+      - FTLCONF_dns_dnssec=true
+      - FTLCONF_dns_listeningMode=single
+      - FTLCONF_misc_etc_dnsmasq_d=true
     volumes:
       - ./etc-pihole:/etc/pihole:rw
       - ./etc-dnsmasq.d:/etc/dnsmasq.d:rw
